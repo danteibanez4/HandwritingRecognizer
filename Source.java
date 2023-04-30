@@ -17,22 +17,41 @@ public class Source{
         String [] splitInfo = contextInfo.split(",");
         String [] collectStrings = new String[splitInfo.length];
 
-        //read in contents (to be passed in first layer)
+        //collect info to the string with for loop (this is gonna take a looong while)
+        for(int i = 0; i < splitInfo.length; i++){
+            collectStrings[i] = splitInfo[i];
+        }
+        //read in contents (to be passed in first layer) and close infile
+        firstLayer(collectStrings);
+        inFile.close();
     }
 
-    public static void firstLayer(){
-        //first layer
+    public static void firstLayer(String [] collectedStrings){
+        int networkStructureLength = 5; //do only 5 letters of the alphabet
+        //first layer (read in all contents of )
+        for(int i = 0; i < collectedStrings.length; i++){
+
+        }
     }
 
     public static void secondLayer(){
         //second layer
+        int networkStructureLength = 2
+        
     }
 
     public static void finalLayer(){
+        int epochs = 100; //can be modified by the user
         //final layer
+        System.out.println("Current data imported");
+        for(int i = 0; i <= epochs; i++){
+            //display epoch, learning rate, and error percentage values onto the console
+            System.out.println("epoch=" + epochs +"lrate = " + "error = " calculateErrorPrecentage());
+        }
     }
 
     //additional methods
+    //sigmoidal method to recalculate the weights
     public static double sigmoidal(){
         return 0.0;
     }
