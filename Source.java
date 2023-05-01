@@ -53,6 +53,7 @@ public class Source{
         double inputValue = 0; //value to be collected for sigmoidal function
         double finalValue = 0;
         double errorPercentage = 0;
+        //for loop to read in and calculate 
         for(int i = 0; i < collectedValues.length; i++){
             inputValue = collectedValues[i] * networkStructureLength;
             finalValue = sigmoidal(inputValue);
@@ -76,6 +77,7 @@ public class Source{
         System.out.println("Current data imported");
 
         for(int i = 0; i <= epochs; i++){
+            learningRate = derivative();
             //display epoch, learning rate, and error percentage values onto the console
             System.out.println("epoch=" + epochs +"lrate = " +learningRate + "error = " + errorPercentage);
             epochs++;
@@ -97,8 +99,14 @@ public class Source{
         return sigmoidalFunction;
     }
 
+    /**
+     * calculate the deriviate (unknown use as of now=)
+     * @return the resul
+     */
     public static double derivative(){
-        double returnDerivative = Math.random() * (1 - Math.random());
+        double oneOrZero = ThreadLocalRandom.current().nextDouble(0, 1 + 1);
+        //double returnDerivative = Math.random() * (1 - Math.random());
+        double returnDerivative = Math.exp(oneOrZero * (1 - oneOrZero));
         return returnDerivative;
     }
 
