@@ -23,6 +23,7 @@ public class Source{
         }
         //read in contents (to be passed in first layer) and close infile
         firstLayer(collectStrings);
+        //close inFile
         readInContents.close();
     }
 
@@ -33,11 +34,12 @@ public class Source{
     public static void firstLayer(String [] collectedStrings){
         int networkStructureLength = 5; //do only 5 letters of the alphabet (A-E)
         int [] collectedValues = new int[collectedStrings.length];
-        //first layer (read in all contents of )
+        //first layer (read in all contents of the inputted array)
         for(int i = 0; i < collectedStrings.length; i++){
             collectedValues[i] *= collectedStrings.length * networkStructureLength;
         }
 
+        //pass onto the second layer
         secondLayer(collectedValues);
     }
 
@@ -54,7 +56,7 @@ public class Source{
         for(int i = 0; i < collectedValues.length; i++){
             inputValue = collectedValues[i] * networkStructureLength;
             finalValue = sigmoidal(inputValue);
-            errorPercentage = calculateErrorPrecentage(inputValue, i);
+            errorPercentage = calculateErrorPrecentage(inputValue, finalValue);
         }
 
         finalLayer(inputValue, errorPercentage);
@@ -64,6 +66,8 @@ public class Source{
     /**
      * Pass onto final layer (mainly to display ephochs, learning rate, and error percentage onto the console)
      * WARNING: This is gonna take a while.
+     * @param finalResult The final result to take in
+     * @param errorPercentage The error percentage to be calculated to the output console
      */
     public static void finalLayer(double finalResult, double errorPercentage){
         int epochs = 100; //can be modified by the user
@@ -74,12 +78,17 @@ public class Source{
         for(int i = 0; i <= epochs; i++){
             //display epoch, learning rate, and error percentage values onto the console
             System.out.println("epoch=" + epochs +"lrate = " +learningRate + "error = " + errorPercentage);
-            i++;
+            epochs++;
         }
     }
 
     //additional methods
     //sigmoidal method to recalculate the weights
+    /**
+     * The sigmoidal weight to be used in the second layer 
+     * @param input The inputted double value
+     * @return the result after readjusting ther weight
+     */
     public static double sigmoidal(double input){
         //declare weight to be used in calculating sigmoid (shoule be a 0 or a 1 initially as DOUBLE)
         //double weight = Math.random();
@@ -93,6 +102,12 @@ public class Source{
         return returnDerivative;
     }
 
+    /**
+     * Calculate the error percentage (based on formula provided in class)
+     * @param expectedResult The expected result
+     * @param collectedResult The collected result
+     * @return result to the console
+     */
     public static double calculateErrorPrecentage(double expectedResult, double collectedResult){
         double errorPercentage = Math.exp(expectedResult - collectedResult);
         return errorPercentage;
