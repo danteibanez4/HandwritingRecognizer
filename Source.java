@@ -24,7 +24,7 @@ public class Source{
         }
         //read in contents (to be passed in first layer) and close infile
         firstLayer(collectStrings);
-        inFile.close();
+        readInContents.close();
     }
 
     /**
@@ -33,7 +33,7 @@ public class Source{
      */
     public static void firstLayer(String [] collectedStrings){
         int networkStructureLength = 5; //do only 5 letters of the alphabet (A-E)
-        int [] collectedValues;
+        int [] collectedValues = new int[collectedStrings.length];
         //first layer (read in all contents of )
         for(int i = 0; i < collectedStrings.length; i++){
             collectedValues[i] *= collectedStrings.length * networkStructureLength;
@@ -48,22 +48,25 @@ public class Source{
      */
     public static void secondLayer(int [] collectedValues){
         //second layer (should only contain 2 nodes at this point )
-        int networkStructureLength = 2
+        int networkStructureLength = 2;
         double inputValue = 0; //value to be collected for sigmoidal function
-        double finalValue = 0
+        double finalValue = 0;
+        double errorPercentage = 0;
         for(int i = 0; i < collectedValues.length; i++){
             inputValue = collectedValues[i] * networkStructureLength;
             finalValue = sigmoidal(inputValue);
+            errorPercentage = calculateErrorPrecentage(inputValue, i);
         }
 
-        finalLayer(inputValue);
+        finalLayer(inputValue, errorPercentage);
+        
     }
 
     /**
      * Pass onto final layer (mainly to display ephochs, learning rate, and error percentage onto the console)
      * WARNING: This is gonna take a while.
      */
-    public static void finalLayer(double finalResult){
+    public static void finalLayer(double finalResult, double errorPercentage){
         int epochs = 100; //can be modified by the user
         double learningRate = 0.0; //learning rate from the system
         //final layer
@@ -71,7 +74,7 @@ public class Source{
 
         for(int i = 0; i <= epochs; i++){
             //display epoch, learning rate, and error percentage values onto the console
-            System.out.println("epoch=" + epochs +"lrate = " +learningRate "error = " calculateErrorPrecentage());
+            System.out.println("epoch=" + epochs +"lrate = " +learningRate + "error = " + errorPercentage);
         }
     }
 
@@ -86,13 +89,12 @@ public class Source{
     }
 
     public static double derivative(){
-        double returnDerivative = Math.random() * (1 - Math.random())
+        double returnDerivative = Math.random() * (1 - Math.random());
         return returnDerivative;
     }
 
     public static double calculateErrorPrecentage(double expectedResult, double collectedResult){
-        //double errorPercentage = Math.exp(expectedResult - collectedResult);
-        double errorPercentage = Math.exp(sigmoidal() - inputValue);
-        return 0.0;
+        double errorPercentage = Math.exp(expectedResult - collectedResult);
+        return errorPercentage;
     }
 }
