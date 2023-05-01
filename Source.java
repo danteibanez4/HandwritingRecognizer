@@ -1,7 +1,6 @@
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.zip.Inflater;
 
 /**
  * Source.java: The Artificial Neural Network that is a handwriting recognizer
@@ -75,6 +74,7 @@ public class Source{
         for(int i = 0; i <= epochs; i++){
             //display epoch, learning rate, and error percentage values onto the console
             System.out.println("epoch=" + epochs +"lrate = " +learningRate + "error = " + errorPercentage);
+            i++;
         }
     }
 
@@ -84,7 +84,7 @@ public class Source{
         //declare weight to be used in calculating sigmoid (shoule be a 0 or a 1 initially as DOUBLE)
         //double weight = Math.random();
         double weight = ThreadLocalRandom.current().nextDouble(0, 1 + 1);
-        double sigmoidalFunction = weight / (1+ Math.exp(input));
+        double sigmoidalFunction = weight / (1+ Math.exp(input)); //calculate the sigmoidal method
         return sigmoidalFunction;
     }
 
