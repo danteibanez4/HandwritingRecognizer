@@ -26,20 +26,32 @@ public class Source{
         inFile.close();
     }
 
+    /**
+     * Pass on info to the firstLayer
+     * @param collectedStrings the read in to be taken in and collected
+     */
     public static void firstLayer(String [] collectedStrings){
-        int networkStructureLength = 5; //do only 5 letters of the alphabet
+        int networkStructureLength = 5; //do only 5 letters of the alphabet (A-E)
         //first layer (read in all contents of )
         for(int i = 0; i < collectedStrings.length; i++){
 
         }
     }
 
-    public static void secondLayer(){
-        //second layer
+    /**
+     * Second layer, to call in sigmoidal to execute and readjust the weights
+     * @param collectedValues values to be read in from first layer
+     */
+    public static void secondLayer(int [] collectedValues){
+        //second layer (should only contain 2 nodes at this point )
         int networkStructureLength = 2
 
     }
 
+    /**
+     * Pass onto final layer (mainly to display ephochs, learning rate, and error percentage onto the console)
+     * WARNING: This is gonna take a while.
+     */
     public static void finalLayer(){
         int epochs = 100; //can be modified by the user
         double learningRate = 0.0; //learning rate from the system
@@ -48,7 +60,7 @@ public class Source{
 
         for(int i = 0; i <= epochs; i++){
             //display epoch, learning rate, and error percentage values onto the console
-            System.out.println("epoch=" + epochs +"lrate = " + "error = " calculateErrorPrecentage());
+            System.out.println("epoch=" + epochs +"lrate = " +learningRate "error = " calculateErrorPrecentage());
         }
     }
 
@@ -66,8 +78,9 @@ public class Source{
         return returnDerivative;
     }
 
-    public static double calculateErrorPrecentage(int expectedResult, double collectedResult){
-        double errorPercentage = Math.exp(expectedResult - collectedResult);
+    public static double calculateErrorPrecentage(double expectedResult, double collectedResult){
+        //double errorPercentage = Math.exp(expectedResult - collectedResult);
+        double errorPercentage = Math.exp(sigmoidal() - derivative());
         return 0.0;
     }
 }
