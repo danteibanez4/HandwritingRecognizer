@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.zip.Inflater;
 
 /**
@@ -32,10 +33,13 @@ public class Source{
      */
     public static void firstLayer(String [] collectedStrings){
         int networkStructureLength = 5; //do only 5 letters of the alphabet (A-E)
+        int [] collectedValues;
         //first layer (read in all contents of )
         for(int i = 0; i < collectedStrings.length; i++){
-
+            collectedValues[i] *= collectedStrings.length * networkStructureLength;
         }
+
+        secondLayer(collectedValues);
     }
 
     /**
@@ -45,14 +49,21 @@ public class Source{
     public static void secondLayer(int [] collectedValues){
         //second layer (should only contain 2 nodes at this point )
         int networkStructureLength = 2
+        double inputValue = 0; //value to be collected for sigmoidal function
+        double finalValue = 0
+        for(int i = 0; i < collectedValues.length; i++){
+            inputValue = collectedValues[i] * networkStructureLength;
+            finalValue = sigmoidal(inputValue);
+        }
 
+        finalLayer(inputValue);
     }
 
     /**
      * Pass onto final layer (mainly to display ephochs, learning rate, and error percentage onto the console)
      * WARNING: This is gonna take a while.
      */
-    public static void finalLayer(){
+    public static void finalLayer(double finalResult){
         int epochs = 100; //can be modified by the user
         double learningRate = 0.0; //learning rate from the system
         //final layer
@@ -66,10 +77,11 @@ public class Source{
 
     //additional methods
     //sigmoidal method to recalculate the weights
-    public static double sigmoidal(){
-        //declare weight to be used in calculating sigmoid
-        double weight = Math.random();
-        double sigmoidalFunction = weight / (1+ Math.exp(weight));
+    public static double sigmoidal(double input){
+        //declare weight to be used in calculating sigmoid (shoule be a 0 or a 1 initially as DOUBLE)
+        //double weight = Math.random();
+        double weight = ThreadLocalRandom.current().nextDouble(0, 1 + 1);
+        double sigmoidalFunction = weight / (1+ Math.exp(input));
         return sigmoidalFunction;
     }
 
@@ -80,7 +92,7 @@ public class Source{
 
     public static double calculateErrorPrecentage(double expectedResult, double collectedResult){
         //double errorPercentage = Math.exp(expectedResult - collectedResult);
-        double errorPercentage = Math.exp(sigmoidal() - derivative());
+        double errorPercentage = Math.exp(sigmoidal() - inputValue);
         return 0.0;
     }
 }
