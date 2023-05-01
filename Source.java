@@ -37,13 +37,15 @@ public class Source{
     public static void secondLayer(){
         //second layer
         int networkStructureLength = 2
-        
+
     }
 
     public static void finalLayer(){
         int epochs = 100; //can be modified by the user
+        double learningRate = 0.0; //learning rate from the system
         //final layer
         System.out.println("Current data imported");
+
         for(int i = 0; i <= epochs; i++){
             //display epoch, learning rate, and error percentage values onto the console
             System.out.println("epoch=" + epochs +"lrate = " + "error = " calculateErrorPrecentage());
@@ -53,14 +55,19 @@ public class Source{
     //additional methods
     //sigmoidal method to recalculate the weights
     public static double sigmoidal(){
-        return 0.0;
+        //declare weight to be used in calculating sigmoid
+        double weight = Math.random();
+        double sigmoidalFunction = weight / (1+ Math.exp(weight));
+        return sigmoidalFunction;
     }
 
     public static double derivative(){
-        return 0.0;
+        double returnDerivative = Math.random() * (1 - Math.random())
+        return returnDerivative;
     }
 
-    public static double calculateErrorPrecentage(){
+    public static double calculateErrorPrecentage(int expectedResult, double collectedResult){
+        double errorPercentage = Math.exp(expectedResult - collectedResult);
         return 0.0;
     }
 }
