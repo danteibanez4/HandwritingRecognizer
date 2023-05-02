@@ -71,7 +71,7 @@ public class Source{
      * @param errorPercentage The error percentage to be calculated to the output console
      */
     public static void finalLayer(double finalResult, double errorPercentage){
-        int epochs = 100; //can be modified by the user
+        int epochs = 100; //can be modified by the user (784 maximum, 100 to not punish my poor system)
         double learningRate = 0.0; //learning rate from the system
         //final layer
         System.out.println("Current data imported");
@@ -104,8 +104,8 @@ public class Source{
      * @return the resul
      */
     public static double derivative(){
+        //calculate and return derivative value
         double oneOrZero = ThreadLocalRandom.current().nextDouble(0, 1 + 1);
-        //double returnDerivative = Math.random() * (1 - Math.random());
         double returnDerivative = Math.exp(oneOrZero * (1 - oneOrZero));
         return returnDerivative;
     }
@@ -117,6 +117,7 @@ public class Source{
      * @return result to the console
      */
     public static double calculateErrorPrecentage(double expectedResult, double collectedResult){
+        //calculate error percentage
         double errorPercentage = Math.exp(expectedResult - collectedResult);
         return errorPercentage;
     }
